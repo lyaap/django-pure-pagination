@@ -10,14 +10,18 @@ PAGINATION_SETTINGS = getattr(settings, "PAGINATION_SETTINGS", {})
 PAGE_RANGE_DISPLAYED = PAGINATION_SETTINGS.get("PAGE_RANGE_DISPLAYED", 10)
 MARGIN_PAGES_DISPLAYED = PAGINATION_SETTINGS.get("MARGIN_PAGES_DISPLAYED", 2)
 
+
 class InvalidPage(Exception):
     pass
+
 
 class PageNotAnInteger(InvalidPage):
     pass
 
+
 class EmptyPage(InvalidPage):
     pass
+
 
 class Paginator(object):
     def __init__(self, object_list, per_page, orphans=0, allow_empty_first_page=True, request=None):
@@ -178,7 +182,7 @@ class Page(object):
         elif self.number < PAGE_RANGE_DISPLAYED/2:
             left_side = self.number
             right_side = PAGE_RANGE_DISPLAYED - left_side
-        for page in xrange(1, self.paginator.num_pages+1):
+        for page in range(1, self.paginator.num_pages+1):
             if page <= MARGIN_PAGES_DISPLAYED:
                 result.append(page)
                 continue
